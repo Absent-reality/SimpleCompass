@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="SimpleCompass.MainPage"
+             BackgroundImageSource="comp_back.png"
+             NavigatedTo="OnArrival"
+             NavigatedFrom="RunAway"
+             >
+
+
+
+
+    <Grid >
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="210*" />
+            <ColumnDefinition Width="339*" />
+            <ColumnDefinition Width="211*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="305*" />
+            <RowDefinition Height="340*" />
+            <RowDefinition Height="224*" />
+            <RowDefinition Height="66*" />
+            <RowDefinition Height="454*" />
+        </Grid.RowDefinitions>
+
+        <Image
+                    x:Name="CenterComp"
+                    Source="comp_cntr.png"                   
+                    Grid.Column="1"
+                    Grid.Row="1" />
+            
+        <Button
+                    x:Name="ToggleBtn"                    
+                    ImageSource="btn_red.png"
+                    BackgroundColor="Transparent"                   
+                    Clicked="OnToggleClicked"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Grid.Column="1"
+                    Grid.Row="3"
+                    CornerRadius="20"
+                    WidthRequest="60"
+                    HeightRequest="60"  />
+
+        <Entry    
+            x:Name="notice_lbl"
+            Text=""
+            TextColor="Black"
+            FontSize="Medium"
+            FontAttributes="Bold"
+            IsReadOnly="True"
+            Opacity="0"
+            Grid.Column="1"
+            Grid.Row="4"
+            VerticalOptions="End"
+            HorizontalOptions="Center" >
+            <Entry.Shadow>
+                <Shadow
+                    Brush ="Black"
+                    Offset="20,20"
+                    Radius="40"
+                    Opacity="0.5"/>
+            </Entry.Shadow>
+        </Entry>
+
+    </Grid>
+
+</ContentPage>
