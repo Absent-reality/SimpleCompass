@@ -38,8 +38,7 @@ namespace SimpleCompass
                 }
                 else
                 {
-                    Announce("Paused..");
-                    await Toast.Make("Compass paused.").Show();
+                    Announce("Paused..");                   
                     
                     Compass.Default.Stop();
                     Compass.Default.ReadingChanged -= Compass_ReadingChanged;
@@ -51,19 +50,13 @@ namespace SimpleCompass
         }
         
         private void Compass_ReadingChanged(object sender, CompassChangedEventArgs e)
-        {                                         
-            compassHeading = ConvertRange(0, 360, 0, -360, e.Reading.HeadingMagneticNorth);             
+        {
+            compassHeading = e.Reading.HeadingMagneticNorth * -1; // Correcting rotation direction and position.          
             timeSinceLastCheck = (int)delayTime.ElapsedMilliseconds;
             Update_Position(timeSinceLastCheck); 
         }
 
-        public static double ConvertRange(double oldMin, double oldmax, double newMin, double newMax, double value)
-        {   
-            double scale = (double)(newMax - newMin) / (oldmax - oldMin);
-            return (double)(newMin + ((value - oldMin) * scale));
-        }
-
-        public void Update_Position(int delay) // adding a delay smooths the rotation.
+        public void Update_Position(int delay) // adding a delay helps smooth the rotation.
         {
           if (delay < 100)
             {
@@ -89,8 +82,8 @@ namespace SimpleCompass
             DeviceDisplay.KeepScreenOn = true;
              notice_lbl.Text = "Press red button";
             await notice_lbl.FadeTo(1, 1000);
-            await Task.Delay(2000);
-            await notice_lbl.FadeTo(0, 1000);
+            await Task.Delay(1000);
+            await notice_lbl.FadeTo(0, 500);
              notice_lbl.Text = "to start compass.";
             await notice_lbl.FadeTo(1, 1000);
             await Task.Delay(2000);
